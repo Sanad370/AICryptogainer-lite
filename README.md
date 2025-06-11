@@ -1,39 +1,47 @@
 # AICryptogainer-lite
 uses chatbots through API to make trades.
 ChatGPT (OpenAI)
+Based on my search results, here are the AI chatbots from your list that have API access:
 
-## Major AI Chatbots with Internet Access:
+## **Confirmed API Access:**
 
-**ChatGPT (OpenAI)**
-- ChatGPT, developed by OpenAI, is arguably the best-known AI chatbot on the market
-- Can search the web for real-time information (with paid plans)
+**✅ ChatGPT (OpenAI)**
+- Full API access through OpenAI's API
+- Azure OpenAI APIs which add support for ongoing access to the latest features
+- Supports internet search capabilities via API
 
-**Perplexity AI**
-- Perplexity AI offers a unique fusion of search and conversational capabilities, delivering nuanced responses with near real-time citations and comprehensive information retrieval
-- Specializes in search-based responses with citations
+**✅ Claude AI (Anthropic)**
+- API available through Anthropic's platform
+- Anthropic launches Claude 4 models with API access
+- Web search capabilities recently added
 
-**Microsoft Copilot**
-- Microsoft Copilot is mentioned among the top tools with internet access
-- Integrated with Bing search
+**✅ Google Gemini**
+- Google AI API available
+- Gemini models integrated into various platforms including GitHub Copilot
+- API supports internet-connected features
 
-**Google Gemini (formerly Bard)**
-- Google Bard Lite – Known for its real-time access to web data (depending on settings), this bot offers concise, research-backed answers
-- Google Gemini is listed among the top generative AI chatbots
+**✅ Perplexity AI**
+- Perplexity launches Sonar, an API for AI search 
+- Recently launched their Sonar API specifically for AI search functionality
+- Perplexity Sonar uses large language models to answer requests based on various web sources
 
-**Claude AI (Anthropic)**
-- In 2025, this Anthropic chatbot finally got some internet access and real-time data
-- Recently gained web search capabilities
+**✅ Microsoft Copilot**
+- Available through Azure OpenAI Service
+- Microsoft introduced Copilot Search in Bing, blending traditional search with generative AI responses
+- Can be accessed via Microsoft's developer APIs
 
-## Other Notable Mentions:
+## **Limited/Unclear API Access:**
 
-**Writingmate.ai**
-- Writingmate.ai is mentioned as one of the top AI tools with internet access
+**❓ Meta AI**
+- No clear evidence of public API with internet search capabilities found
 
-**Meta AI**
-- Meta AI is included in rankings of popular AI chatbots
+**❓ Grok (X/Twitter)**
+- No public API access mentioned in search results
 
-**Grok (X/Twitter)**
-- Grok is mentioned among tested AI chatbots
+**❓ Writingmate.ai**
+- No specific API information found
 
-**Arc Search**
-- Arc Search is listed as having search capabilities
+**❓ Arc Search**
+- No API access information found
+
+The top contenders with robust API access and internet search capabilities are **OpenAI's ChatGPT**, **Anthropic's Claude**, **Google Gemini**, **Perplexity's Sonar API**, and **Microsoft Copilot** through Azure services.
