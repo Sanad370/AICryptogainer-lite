@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 # Initialize Binance
 exchange = ccxt.binance({
     'apiKey': API,  # Replace with your actual API key
-    'secret': secret,  # Replace with your actual secret
+    'secret': SECRET,  # Replace with your actual secret
     'sandbox': False,  # Set to True for testnet
     'enableRateLimit': True,
 })
