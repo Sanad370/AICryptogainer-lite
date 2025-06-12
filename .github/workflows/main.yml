@@ -7,14 +7,14 @@ on:
 
 jobs:
   run-script:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted  # Changed to self-hosted for VPN support
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4  # Updated to latest version
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5  # Updated to latest version
         with:
           python-version: '3.10'
 
@@ -22,8 +22,43 @@ jobs:
         run: |
           pip install pandas numpy ccxt
 
+      - name: Install WireGuard
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wireguard
+          echo "WireGuard installed"
+
+      - name: Configure WireGuard VPN
+        run: |
+          echo "[Interface]" > /tmp/vpn.conf
+          echo "PrivateKey = ${{ secrets.CLIENT_PRIVATE_KEY }}" >> /tmp/vpn.conf
+          echo "Address = 10.66.66.2/24" >> /tmp/vpn.conf
+          echo "DNS = 1.1.1.1" >> /tmp/vpn.conf
+          echo "" >> /tmp/vpn.conf
+          echo "[Peer]" >> /tmp/vpn.conf
+          echo "PublicKey = ${{ secrets.SERVER_PUBLIC_KEY }}" >> /tmp/vpn.conf
+          echo "Endpoint = ${{ secrets.SERVER_IP }}:51820" >> /tmp/vpn.conf
+          echo "AllowedIPs = 0.0.0.0/0" >> /tmp/vpn.conf
+          echo "PersistentKeepalive = 25" >> /tmp/vpn.conf
+          sudo mv /tmp/vpn.conf /etc/wireguard/vpn.conf
+          sudo chmod 600 /etc/wireguard/vpn.conf
+          echo "VPN configuration created"
+
+      - name: Start WireGuard VPN
+        run: |
+          sudo wg-quick up vpn
+          sleep 5  # Wait for VPN to establish
+          echo "VPN started, current IP: $(curl -s ifconfig.me)"
+          sudo wg show
+
       - name: Run Python script with secrets
         env:
           API: ${{ secrets.API }}
           SECRET: ${{ secrets.SECRET }}
         run: python main.py
+
+      - name: Stop WireGuard VPN
+        if: always()  # Ensure cleanup even if previous step fails
+        run: |
+          sudo wg-quick down vpn || true
+          echo "VPN stopped"
