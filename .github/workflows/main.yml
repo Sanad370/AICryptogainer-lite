@@ -11,21 +11,22 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4  # Updated to latest version
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5  # Updated to latest version
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
       - name: Install dependencies
         run: |
           pip install pandas numpy ccxt
+          echo "Dependencies installed"
 
       - name: Install WireGuard
         run: |
           sudo apt-get update
-          sudo apt-get install -y wireguard
+          sudo apt-get install -y wireguard || { echo "WireGuard install failed"; exit 1; }
           echo "WireGuard installed"
 
       - name: Configure WireGuard VPN
@@ -46,8 +47,8 @@ jobs:
 
       - name: Start WireGuard VPN
         run: |
-          sudo wg-quick up vpn
-          sleep 5  # Wait for VPN to establish
+          sudo wg-quick up vpn || { echo "VPN start failed"; cat /var/log/syslog | grep wireguard; exit 1; }
+          sleep 5
           echo "VPN started, current IP: $(curl -s ifconfig.me)"
           sudo wg show
 
@@ -55,10 +56,12 @@ jobs:
         env:
           API: ${{ secrets.API }}
           SECRET: ${{ secrets.SECRET }}
-        run: python main.py
+        run: |
+          echo "Running main.py with API: $API"
+          python main.py || { echo "Script failed"; exit 1; }
 
       - name: Stop WireGuard VPN
-        if: always()  # Ensure cleanup even if previous step fails
+        if: always()
         run: |
           sudo wg-quick down vpn || true
           echo "VPN stopped"
