@@ -1,8 +1,16 @@
+name: Run Python Script Every 4 Hours
+
+on:
+  schedule:
+    - cron: '0 */4 * * *'  # Every 4 hours
+  workflow_dispatch:  # Optional: allows manual triggering from the GitHub UI
+
 jobs:
   run-script:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Set up Python
@@ -14,7 +22,7 @@ jobs:
         run: |
           pip install pandas numpy ccxt
 
-      - name: Run script
+      - name: Run Python script with secrets
         env:
           API: ${{ secrets.API }}
           SECRET: ${{ secrets.SECRET }}
