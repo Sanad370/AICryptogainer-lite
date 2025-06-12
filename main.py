@@ -5,8 +5,8 @@ from datetime import datetime, timedelta
 
 # Initialize Binance
 exchange = ccxt.binance({
-    'apiKey': API,  # Replace with your actual API key
-    'secret': SECRET,  # Replace with your actual secret
+    'apiKey': os.environ['API'],  # Replace with your actual API key
+    'secret': os.environ['SECRET'],  # Replace with your actual secret
     'sandbox': False,  # Set to True for testnet
     'enableRateLimit': True,
 })
@@ -907,7 +907,7 @@ def auto_rebalance_wallet(existing_analysis=None, min_score_threshold=35, max_po
 
 if __name__ == "__main__":
     # Check if API keys are set
-    if exchange.apiKey == API:
+    if exchange.apiKey == os.environ['API']:
         print("⚠️  Please set your Binance API credentials in the code")
         print("⚠️  The script will try to run with public endpoints only")
 
