@@ -26,4 +26,4 @@ jobs:
         env:
           API: ${{ secrets.API }}
           SECRET: ${{ secrets.SECRET }}
-        run: python run.py
+        run: python main.py
