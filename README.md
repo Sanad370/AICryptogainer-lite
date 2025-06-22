@@ -1,3 +1,6 @@
+# TO ENABLE API CONVERSION, YOU MUST COMPLETE THE BINANCE SURVEY: https://www.binance.com/en/survey/9b262810a04a4d00840e6ec1bb1425d4 
+
+
 # AICryptogainer-lite
 uses chatbots through API to make trades.
 ChatGPT (OpenAI)
